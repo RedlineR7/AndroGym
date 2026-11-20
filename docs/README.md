@@ -20,8 +20,8 @@ Pick the part that matches what you're doing. If you just have a question, try t
 | [Backup to WebDAV](WEBDAV_BACKUP.md) | You want a daily copy in your own Nextcloud or WebDAV folder, and to restore it on a new phone |
 | [Calendar feed](CALENDAR.md) | Your planned sessions (and finished workouts) should show up in Apple, Google or Outlook calendar |
 
-The [live demo](https://opengym.ch/demo/) is the real app with example data, nothing
-to install.
+The [README](../README.md#quick-start) has the one-line way to run the app and look around
+without creating a profile.
 
 ## Hosting it
 
@@ -69,6 +69,5 @@ Design notes for specific features, kept next to the code they describe:
 
 ## Still stuck?
 
-Ask on the [Discord](https://discord.gg/e62jY6fwVb) or in
-[Discussions](https://github.com/RedlineR7/AndroGym/discussions). If something in these docs was
-wrong or missing, that's worth an issue too.
+Ask in [Discussions](https://github.com/RedlineR7/AndroGym/discussions). If something in these
+docs was wrong or missing, that's worth an issue too.

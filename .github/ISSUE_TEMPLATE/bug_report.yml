@@ -32,19 +32,17 @@ body:
   - type: dropdown
     id: setup
     attributes:
-      label: How are you running openGym?
+      label: How are you running AndroGym?
       description: Pick all that apply, e.g. the iPhone app connected to your own server.
       multiple: true
       options:
         - iPhone app (App Store or TestFlight)
         - Apple Watch app
-        - Android app (APK from GitHub or opengym.ch)
-        - Android app (Google Play)
+        - Android app (APK built from this repository)
         - Phone app on its own, no server ("Use on this device")
         - Phone app connected to my server
         - Web app in the browser, self-hosted (docker compose)
         - Web app on someone else's instance
-        - Demo (opengym.ch/demo)
         - Frontend dev server (npm run dev)
         - Other / not sure
     validations:

@@ -8,26 +8,26 @@
 </picture>
 </p>
 
-<a href="https://discord.gg/e62jY6fwVb"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2Fe62jY6fwVb%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&label=Discord&logo=discord&logoColor=white&style=flat-square&labelColor=0c0e12&color=a3e635" alt="Discord"></a>
 <a href="https://github.com/RedlineR7/AndroGym/stargazers"><img src="https://img.shields.io/github/stars/RedlineR7/AndroGym?logo=github&logoColor=white&label=stars&style=flat-square&labelColor=0c0e12&color=a3e635" alt="Stars"></a>
 <a href="https://github.com/RedlineR7/AndroGym/releases"><img src="https://img.shields.io/github/v/release/RedlineR7/AndroGym?label=release&style=flat-square&labelColor=0c0e12&color=a3e635" alt="Release"></a>
 <a href="https://github.com/RedlineR7/AndroGym/releases"><img src="https://img.shields.io/github/downloads/RedlineR7/AndroGym/total?label=downloads&style=flat-square&labelColor=0c0e12&color=a3e635" alt="Downloads"></a>
 <a href="https://github.com/RedlineR7/AndroGym/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/RedlineR7/AndroGym/test.yml?branch=main&label=tests&style=flat-square&labelColor=0c0e12&color=a3e635" alt="Tests"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-a3e635?style=flat-square&labelColor=0c0e12&color=a3e635" alt="AGPL-3.0"></a>
 
-<a href="https://apps.apple.com/app/id6822275400"><img src="website/app-store-badge.svg" alt="Download on the App Store" height="40"></a>
 <a href="https://github.com/RedlineR7/AndroGym/releases/latest"><img src="assets/readme/badge-android.svg" alt="Download the Android APK" height="40"></a>
 <a href="docs/SELF_HOSTING.md"><img src="assets/readme/badge-selfhost.svg" alt="Self-host with Docker" height="40"></a>
 
-<a href="https://trendshift.io/repositories/88268?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-88268" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/88268" alt="RedlineR7%2FAndroGym | Trendshift" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/88268?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-88268" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/88268/weekly?language=JavaScript" alt="RedlineR7%2FAndroGym | Trendshift" width="250" height="55"/></a>
-
-[Website](https://opengym.ch) · [Live demo](https://opengym.ch/demo/) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md)
-
-<a href="https://buymeacoffee.com/duartesantos"><img src="assets/readme/badge-coffee.svg" alt="Buy me a coffee" height="40"></a>
-<a href="https://ko-fi.com/opengym"><img src="assets/readme/badge-kofi.svg" alt="Support AndroGym on Ko-fi" height="40"></a>
+[Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Documentation](docs/README.md)
 
 </div>
+
+## This fork
+
+AndroGym is a personal fork of [openGym](https://github.com/DuarteSantos8/openGym), rebranded and
+built for Android. The server, the training engine and the exercise catalogue are upstream's work,
+under the AGPL; the exercise media stay under their own licence (see [License](#license)). Only the
+Android app is built here: the iPhone app, the store listings, the demo site and the upstream
+registries are not part of this fork.
 
 ## Why AndroGym
 
@@ -39,8 +39,8 @@ sign-in, works offline, syncs between your phone and your laptop.
 No account on someone else's server, no subscription, no ads, no telemetry. One
 `docker compose up` and it's running.
 
-The [in-browser demo](https://opengym.ch/demo/) is the real app with example data,
-if you want to try it before installing anything.
+To look around before creating a profile, run it as below and choose **Continue without account**:
+the app opens in guest mode.
 
 ## Features
 
@@ -163,10 +163,10 @@ Traefik and nginx, and there are separate guides for
 [HTTPS on a LAN](docs/SELF_HOSTING_HTTPS.md), [a Mac with Tailscale](docs/SELF_HOSTING_MAC.md) and [Kubernetes](docs/SELF_HOSTING_KUBERNETES.md).
 
 > [!NOTE]
-> Images are published from the same tag to `ghcr.io/duartesantos8/opengym-{api,web}`
-> (what `docker-compose.yml` pulls) and `registry.gitlab.com/duartesantos8/opengym/{api,web}`. Swap
-> the `image:` lines if you prefer GitLab's registry, or run `docker compose up -d --build` to build
-> locally. Either way you don't need Node on the host.
+> This fork does not publish images of its own. The `image:` lines in `docker-compose.yml` still
+> point at the upstream openGym registry, so `docker compose pull` gives you upstream's build; run
+> `docker compose up -d --build` to build this fork's code instead. Either way you don't need Node
+> on the host.
 
 <details>
 <summary><b>Configuration reference</b> (all through <code>.env</code>)</summary>
@@ -212,14 +212,13 @@ the phone, no account) or connect them to your server and sync.
 
 | | Get it |
 |---|---|
-| **iPhone and iPad**, with the **Apple Watch** app | The [App Store](https://apps.apple.com/app/id6822275400), in every App Store country |
-| **Android** | The signed APK from the [latest release](https://github.com/RedlineR7/AndroGym/releases/latest) or [opengym.ch](https://opengym.ch), in three sizes: **Standard** (`AndroGym-X.Y.Z.apk`, animations at 180 px, about 315 MB), **Plus** (`AndroGym-Plus-X.Y.Z.apk`, 240 px, about 424 MB) and **HD** (`AndroGym-HD-X.Y.Z.apk`, 360 px, about 760 MB). It updates itself and stays the kind you picked |
-| **Google Play** | In closed testing: Google wants 12 testers for 14 days before it lets everyone in. Join the [tester group](https://groups.google.com/g/opengym-testers/about), then [opt in](https://play.google.com/apps/testing/ch.duartesantos.opengym). It installs right over the APK and keeps your data |
-| **Wear OS watch** (beta) | Rides along with the Google Play test: once Google's watch review is done, "AndroGym Beta" shows up in the Play Store on your Galaxy Watch, Pixel Watch and friends. Details: [docs/WEAR_OS.md](docs/WEAR_OS.md) |
+| **Android** | Build it from this repository: `npm run build:mobile` in `frontend/`, then `./gradlew assembleSideloadDebug` in `frontend/android`. APKs this fork publishes, when there are any, sit under [Releases](https://github.com/RedlineR7/AndroGym/releases). The [Android workflow](.github/workflows/android.yml) builds and keeps one on every `v*` tag |
+| **Wear OS watch** (beta) | Rides along in `frontend/android/wear`, built with the phone app. Details: [docs/WEAR_OS.md](docs/WEAR_OS.md) |
+| **iPhone, iPad and Apple Watch** | Upstream's: this fork builds and publishes the Android app only |
 
-Every APK sits next to its `.sha256`. The APK and the Play app share one signing key, so you can
-switch between them (or between Standard, Plus and HD) without losing data. Details, building it
-yourself and connecting to your server: [docs/MOBILE.md](docs/MOBILE.md).
+The SDK versions, signing setup and connecting the app to your server are in
+[docs/MOBILE.md](docs/MOBILE.md); the sideload build signs with the debug key, so `adb install`
+takes it as is.
 
 ## How it works
 
@@ -242,8 +241,7 @@ frontend, sync, the exercise media and the watch.
 
 The training logic (progression rules, 1RM, how a logged session is read back) lives in pure
 functions under `frontend/src/lib/` with tests beside them. The HTTP API is documented as an
-OpenAPI spec in [`api/openapi.yaml`](api/openapi.yaml), browsable at
-[opengym.ch/api.html](https://opengym.ch/api.html).
+OpenAPI spec in [`api/openapi.yaml`](api/openapi.yaml).
 
 ### How sync works
 
@@ -311,8 +309,6 @@ plan is in [ROADMAP.md](ROADMAP.md), and the issues sit in the
 
 ## Community
 
-- **[Discord](https://discord.gg/e62jY6fwVb)** for release announcements, self-hosting help and
-  quick back-and-forth. Usually the fastest way to get an answer.
 - **[Discussions](https://github.com/RedlineR7/AndroGym/discussions)** for questions and ideas
   you want the next person to find by searching.
 - **[Issues](https://github.com/RedlineR7/AndroGym/issues)** for reproducible bugs and agreed-on
@@ -327,11 +323,11 @@ plan is in [ROADMAP.md](ROADMAP.md), and the issues sit in the
 
 ### Where the code lives
 
-GitHub is the home of the project. [gitlab.com/DuarteSantos8/opengym](https://gitlab.com/DuarteSantos8/opengym)
-is a mirror, updated by a GitHub Actions workflow on every push to `main` and every release tag. It
-exists because its CI builds the multi-arch images and the SBOMs for its registry (the APKs are
-built and signed on the release machine and attached to the GitHub release). Nothing is merged there by hand. In the changelog, `!NN` refers to a GitLab merge request
-from the weeks in August and September 2026 when the project lived there.
+GitHub is the home of this repository. AndroGym is a fork of
+[openGym](https://github.com/DuarteSantos8/openGym): that is where the upstream project, its
+website, its store builds and its releases live, and the changelog's `!NN` entries refer to an
+upstream GitLab merge request from the weeks in August and September 2026 when the project lived
+there.
 
 ## How AndroGym is built
 
@@ -355,29 +351,10 @@ What that does and doesn't mean:
 Community pull requests are written by their authors, with whatever tools they like, and reviewed
 the same way.
 
-## Sponsors
-
-**[ElfHosted](https://store.elfhosted.com/product/opengym/?utm_source=opengym&utm_medium=github&utm_campaign=opengym-sponsor)** sponsors AndroGym. If you'd rather not run a server, ElfHosted
-runs your own private AndroGym for you, and your data stays yours. There's no Docker or HTTPS to set up, the AI coach is included with no API key needed, and updates and daily backups are handled for you. Try it with a $1, 7-day trial.
-
-Sponsoring keeps the lights on. It buys no say in what AndroGym does: nothing is held back for
-sponsors, and nothing ever will be.
-
 ## Support
 
-AndroGym is free and stays free: AGPL, no paid tier, nothing held back for sponsors. If it replaced a
-paid tracker for you and you'd like to chip in, there's Buy Me a Coffee, Ko-fi and GitHub Sponsors
-(the app has the same three under Settings → About & updates, and on the iPhone a shortcut to
-leaving an App Store review). A star, a bug report or a pull request helps just as much.
-
-<a href="https://buymeacoffee.com/duartesantos" target="_blank">
-  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" width="217">
-</a>
-<a href="https://ko-fi.com/opengym" target="_blank"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support AndroGym on Ko-fi" height="60"></a>
-
-[GitHub Sponsors](https://github.com/sponsors/DuarteSantos8)
-
-[![Star History Chart](https://api.star-history.com/svg?repos=duartesantos8/opengym&type=Date)](https://star-history.com/#RedlineR7/AndroGym&Date)
+AndroGym is free and stays free: AGPL, no paid tier, no sponsorship. This fork takes no donations;
+if it is useful to you, a star, a bug report or a pull request is the way to say so.
 
 ## License
 
