@@ -692,7 +692,17 @@ with them; until then the long-press shortcuts are what Android users get.
 ## Prerequisites
 
 - Node 22 (the Capacitor 8 CLI needs it)
-- **Android:** Android Studio (bundles the SDK, API 36). Java 21 for Gradle.
+- **Android:** Android Studio (bundles the SDK, API 36). Java 21 for Gradle. Without Android
+  Studio and without root, `bash scripts/android/setup-sdk.sh` installs JDK 21 and SDK 36 under
+  `~/.android-sdk`; `source ~/.android-sdk/env.sh` puts both on the path.
+- **Android, command line:**
+
+  ```sh
+  bash scripts/android/setup-sdk.sh && source ~/.android-sdk/env.sh
+  cd frontend && npm ci && npm run build:mobile
+  cd android && ./gradlew --no-daemon testSideloadDebugUnitTest assembleSideloadDebug
+  # → app/build/outputs/apk/sideload/debug/app-sideload-debug.apk
+  ```
 - **iOS:** a Mac with Xcode 26 and CocoaPods (`brew install cocoapods`). A free Apple ID
   is enough to run the app on your own iPhone (see below); paid membership is only needed
   for App Store and TestFlight distribution ([APP_STORES.md](APP_STORES.md)).
