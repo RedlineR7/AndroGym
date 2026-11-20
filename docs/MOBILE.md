@@ -19,6 +19,15 @@ The APK and the Google Play app are signed with the same key, so a phone can mov
 the other, or between Standard, Plus and HD, without losing its data. How the store builds are made and
 released is in [APP_STORES.md](APP_STORES.md).
 
+### AndroGym (this fork)
+
+AndroGym is built from this repository under its own application id,
+`io.github.redliner7.androgym`, so it installs beside openGym rather than over it. Android treats
+it as a new app: it starts with an empty log, and an openGym log moves across with Settings → Data
+& backup → **Export backup** (JSON, or the zip with photos and videos) and **Import backup** in
+AndroGym. It cannot be installed over an openGym that another key signed. The Wear OS app carries
+the same id, which is what lets it pair with this phone app.
+
 ## How the phone app works
 
 openGym ships in two flavors from the same codebase:

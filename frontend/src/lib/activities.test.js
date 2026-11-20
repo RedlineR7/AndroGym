@@ -76,8 +76,12 @@ describe('activities: from the health store', () => {
     expect(activityFromHealth(rec, {}, 'hc', now)).toMatchObject({ d: '2026-11-02', sport: 'run', min: 42, src: 'hc' })
   })
   it('skips openGym\'s own, strength, gym cardio, walks, short ones and the future', () => {
+    expect(isOwnRecord({ origin: 'io.github.redliner7.androgym' })).toBe(true)
+    expect(isOwnRecord({ origin: 'io.github.redliner7.androgym.wear' })).toBe(true)
+    // Records written by an older install under the upstream ids stay ours.
     expect(isOwnRecord({ origin: 'ch.duartesantos.opengym' })).toBe(true)
     expect(isOwnRecord({ origin: 'ch.opengym.app.watchkitapp' })).toBe(true)
+    expect(isOwnRecord({ origin: 'com.strava' })).toBe(false)
     expect(isOwnRecord({ clientId: 'opengym-w-1' })).toBe(true)
     expect(activityFromHealth({ ...rec, origin: 'ch.opengym.app' }, {}, 'ah', now)).toBe(null)
     for (const sport of ['strength', 'gym', 'walk']) expect(activityFromHealth({ ...rec, sport }, {}, 'hc', now)).toBe(null)
