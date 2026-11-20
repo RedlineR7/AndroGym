@@ -19,8 +19,27 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Release signing: only when a keystore is handed in, so a checkout without one still
+    // builds (unsigned). The four values come from the environment so no key ever lands in
+    // the repository: ANDROID_KEYSTORE_PATH, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS,
+    // ANDROID_KEY_PASSWORD. scripts/android/release-env.sh is the local helper.
+    def ksPath = System.getenv('ANDROID_KEYSTORE_PATH')
+    def ksPresent = ksPath && file(ksPath).exists()
+    signingConfigs {
+        release {
+            if (ksPresent) {
+                storeFile file(ksPath)
+                storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
     buildTypes {
         release {
+            if (ksPresent) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // The barcode scanner's ML Kit library ships a native build for four CPU families.

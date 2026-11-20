@@ -72,6 +72,28 @@ To try packs on an emulator: `make-asset-packs.mjs --px 240 --builtin 180 --limi
 Upload the `.aab` in Play Console → Test and release → Production (or a testing track first),
 with the release notes from the changelog.
 
+### AndroGym (this fork)
+
+The fork does not use `build-release.sh`: that script reads the maintainer's private quality media
+and emits the three APK sizes and the Play bundle upstream's listings need. AndroGym publishes one
+sideload APK with the repository's 180 px media, under a signing key that is not upstream's (which
+is what lets it sit beside openGym on one phone):
+
+```sh
+cd frontend
+npm ci
+npm run build:mobile
+cd android
+export ANDROID_KEYSTORE_PATH=/path/to/androgym-release.jks
+./gradlew --no-daemon assembleSideloadRelease
+```
+
+The other three variables are `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and
+`ANDROID_KEY_PASSWORD`. With none of them set the build still succeeds, unsigned. The `android`
+workflow runs the same steps and uploads the APK as `androgym-apk`; it signs it when
+`ANDROID_KEYSTORE_BASE64` and its three companion secrets are present. The APK carries 180 px
+animations only, never the private larger sizes.
+
 ### F-Droid
 
 F-Droid builds the `fdroid` flavour itself from the release tag (fdroiddata recipe
