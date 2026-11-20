@@ -1325,7 +1325,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
         {MOBILE && ios && <Row icon="star" iconTint="var(--orange)" title={t('Rate AndroGym on the App Store')} accessory="chevron"
           onClick={() => window.open('https://apps.apple.com/app/id6822275400?action=write-review', '_blank', 'noopener')} />}
         {play && <Row icon="star" iconTint="var(--orange)" title={t('Rate AndroGym on Google Play')} accessory="chevron"
-          onClick={() => window.open('https://play.google.com/store/apps/details?id=ch.duartesantos.opengym', '_blank', 'noopener')} />}
+          onClick={() => window.open('https://play.google.com/store/apps/details?id=io.github.redliner7.androgym', '_blank', 'noopener')} />}
         {!play && <>
           <Row icon="heart" iconTint="var(--pink)" title={t('Buy me a coffee')} subtitle="Buy Me a Coffee" accessory="chevron"
             onClick={() => window.open('https://buymeacoffee.com/duartesantos', '_blank', 'noopener')} />

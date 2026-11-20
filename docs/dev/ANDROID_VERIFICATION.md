@@ -29,6 +29,10 @@ usable. Every item below is owed to a device pass.
 Install with `adb install -r frontend/android/app/build/outputs/apk/sideload/debug/app-sideload-debug.apk`
 (debug build, own package), then walk these. Record pass/fail and the date.
 
+`scripts/android/verify-device.sh` does the mechanical part of this list over adb (package and
+version of the APK, install, cold start, a fatal exception or a dead process in logcat) and prints
+the rest as the checklist below. It has not been run against a phone yet.
+
 - [ ] **First launch:** asks local or server; choosing local reaches Home without a sign-in screen.
 - [ ] **Cold start:** boot screen shows instead of a black WebView; no tab bar under the navigation bar, no header under the status bar.
 - [ ] **Logging:** a workout, a routine and a weigh-in save; force-stop and relaunch, all three are still there (file mirror, not just WebView storage).

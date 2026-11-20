@@ -5,7 +5,7 @@
 // it must never become the value of a promise (the Coach hang, #42): here that would hang every
 // rest alert call.
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 
 const h = vi.hoisted(() => {
   vi.stubEnv('VITE_MOBILE', '1')   // lib/mobile.js: MOBILE = import.meta.env.VITE_MOBILE === '1'
@@ -394,8 +394,11 @@ describe('iPhone: the rest tone never stops the music', () => {
   it('the app project compiles the ledger in and CI tests it', () => {
     const pbx = readFileSync(new URL('../../ios/App/App.xcodeproj/project.pbxproj', import.meta.url), 'utf8')
     expect(pbx).toMatch(/CueAudioLedger\.swift in Sources/)
-    const ci = readFileSync(new URL('../../../.github/workflows/ios.yml', import.meta.url), 'utf8')
-    expect(ci).toMatch(/working-directory: frontend\/ios\/App\/CueAudioCore/)
+    // AndroGym builds the Android app only, so there is no ios.yml to check here; the Xcode
+    // project assertion above still runs. Upstream (where the iPhone app is built) has one.
+    const iosCi = new URL('../../../.github/workflows/ios.yml', import.meta.url)
+    if (!existsSync(iosCi)) return
+    expect(readFileSync(iosCi, 'utf8')).toMatch(/working-directory: frontend\/ios\/App\/CueAudioCore/)
   })
 })
 
