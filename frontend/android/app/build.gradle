@@ -22,7 +22,7 @@ android {
     // Release signing: only when a keystore is handed in, so a checkout without one still
     // builds (unsigned). The four values come from the environment so no key ever lands in
     // the repository: ANDROID_KEYSTORE_PATH, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS,
-    // ANDROID_KEY_PASSWORD. scripts/android/release-env.sh is the local helper.
+    // ANDROID_KEY_PASSWORD (docs/APP_STORES.md, "AndroGym (this fork)").
     def ksPath = System.getenv('ANDROID_KEYSTORE_PATH')
     def ksPresent = ksPath && file(ksPath).exists()
     signingConfigs {
