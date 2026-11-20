@@ -99,8 +99,10 @@ if [ -z "$crashes" ]; then ok "no fatal exception in logcat since launch"; else 
 webview=$(adb -s "$serial" logcat -d 2>/dev/null | grep -cE 'chromium.*(ERR_|net::ERR)' || true)
 [ "$webview" = "0" ] && ok "no failed resource loads in the WebView" \
   || echo "  note  $webview failed loads in the WebView console (a missing media file shows up here)"
-adb -s "$serial" logcat -d > "./android-logcat-$(date +%Y%m%d-%H%M%S).txt" 2>/dev/null || true
-echo "  note  full logcat saved to android-logcat-*.txt in this directory"
+# Kept outside the repository: a check that writes files must not dirty the working tree.
+logfile=$(mktemp "${TMPDIR:-/tmp}/android-logcat-XXXXXX.txt" 2>/dev/null || echo "/tmp/android-logcat-$(date +%Y%m%d-%H%M%S).txt")
+adb -s "$serial" logcat -d > "$logfile" 2>/dev/null || true
+echo "  note  full logcat saved to $logfile"
 
 # 5. What a script cannot answer. Same list as docs/dev/ANDROID_VERIFICATION.md.
 cat <<'CHECKLIST'
