@@ -95,7 +95,7 @@ export function createMediaSync(deps = {}) {
   const accountOf = () => store?.getState().user?.id ?? null
   const ticketFor = () => ({ uid: accountOf(), epoch })
   const current = tk => tk.epoch === epoch && tk.uid != null && accountOf() === tk.uid
-  const forAccount = uid => ({ 'X-OpenGym-Account': String(uid) })
+  const forAccount = uid => ({ 'X-AndroGym-Account': String(uid) })
   const Gone = () => Object.assign(new Error('account changed'), { code: 'account-changed' })
   const mismatch = e => e?.code === 'account-mismatch' || e?.data?.code === 'account-mismatch'
 

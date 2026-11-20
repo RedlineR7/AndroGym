@@ -57,7 +57,7 @@ the weekly schedule only if they tick it.
 | `language` | the language of `title` and session names, `en` by default |
 | `url` | optional https link to the routine's page |
 | `sessions` | 1-7, each a `name` and 1-20 `exercises` |
-| `exercises[]` | `id` from the openGym catalogue (`catalogue/exercises/<id>.json`), `sets` 1-10, `reps` 1-100 **or** `sec` 5-3600 for a hold, optional `rest` in seconds |
+| `exercises[]` | `id` from the AndroGym catalogue (`catalogue/exercises/<id>.json`), `sets` 1-10, `reps` 1-100 **or** `sec` 5-3600 for a hold, optional `rest` in seconds |
 | `schedule` | optional `[weekday, session index]` pairs, weekday 0 (Sunday) to 6 |
 
 An entry with an exercise id the catalogue does not hold is left out whole, so an import is always
@@ -70,10 +70,10 @@ Serve it with `Content-Type: application/json` and, for the web app, `Access-Con
 
 `https://opengym.ch/routines/index.json` is built from the files in [`routines/`](../routines/README.md)
 by `node scripts/routines/build.mjs`, together with the browsable pages at opengym.ch/routines (search,
-filters, a page per routine with "Copy to openGym") and a submit page. Copying uses the app's own
+filters, a page per routine with "Copy to AndroGym") and a submit page. Copying uses the app's own
 formats: each day is a routine link (`https://opengym.ch/r#…`, `opengym://r#…`), the whole routine a
 plan file for Plan > Import plan (`/routines/plans/<slug>.opengym-plan.json`, with the author in
-`from`). The page itself is a link into the app too, like a Spotify link: with openGym installed,
+`from`). The page itself is a link into the app too, like a Spotify link: with AndroGym installed,
 `https://opengym.ch/routines/<slug>/` (or its QR code, scanned with the phone camera or with Plan >
 Scan a QR code) opens the app, which fetches that plan file and shows the import sheet
 (`frontend/src/lib/library-link.js`; the iPhone's `website/.well-known/apple-app-site-association`

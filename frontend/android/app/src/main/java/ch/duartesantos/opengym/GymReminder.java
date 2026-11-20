@@ -69,7 +69,7 @@ final class GymReminder {
      */
     static final long ARM_GRACE_MS = 90_000L;
 
-    static final String TAG = "OpenGymGym";
+    static final String TAG = "AndroGymGym";
     /** The approach alerts use the request codes after the gyms' own ones. */
     private static final int NEAR_SLOT = MAX_GYMS;
     /** How long the server may take to say how today stands before the phone decides alone. */

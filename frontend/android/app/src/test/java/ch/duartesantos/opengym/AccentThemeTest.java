@@ -29,10 +29,10 @@ public class AccentThemeTest {
     @Test
     public void widgetDarkensALightAccentOnWhiteOnly() {
         int brand = 0xFFA3E635, white = 0xFFFFFFFF, card = 0xFF1C1C1E;
-        int onWhite = OpenGymWidgetProvider.readableOn(brand, white);
-        assertTrue(OpenGymWidgetProvider.contrast(onWhite, white) >= 3.0);
-        assertEquals(brand, OpenGymWidgetProvider.readableOn(brand, card));
-        assertEquals(0xFF0A84FF, OpenGymWidgetProvider.readableOn(0xFF0A84FF, white));   // blue already reads
+        int onWhite = AndroGymWidgetProvider.readableOn(brand, white);
+        assertTrue(AndroGymWidgetProvider.contrast(onWhite, white) >= 3.0);
+        assertEquals(brand, AndroGymWidgetProvider.readableOn(brand, card));
+        assertEquals(0xFF0A84FF, AndroGymWidgetProvider.readableOn(0xFF0A84FF, white));   // blue already reads
     }
 
     @Test

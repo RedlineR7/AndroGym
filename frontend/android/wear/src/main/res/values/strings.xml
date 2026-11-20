@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- openGym on Wear OS, English. Written by frontend/android/wear/wear-strings.mjs: change that, not this. -->
+<!-- AndroGym on Wear OS, English. Written by frontend/android/wear/wear-strings.mjs: change that, not this. -->
 <resources>
     <string name="add_birth_year">Add your birth year on the phone</string>
     <string name="added_weight">Added weight</string>
@@ -71,7 +71,7 @@
     <string name="not_now">Not now</string>
     <string name="not_synced">Not synced yet</string>
     <string name="notif_running">Workout running. Tap to jump back in.</string>
-    <string name="open_phone_once">Open openGym on your phone once and your routines show up here.</string>
+    <string name="open_phone_once">Open AndroGym on your phone once and your routines show up here.</string>
     <string name="overview">Overview</string>
     <string name="personal_records">Personal records</string>
     <string name="phone_away">Phone out of reach. Your sets wait here.</string>

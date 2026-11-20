@@ -27,15 +27,15 @@ public class WidgetActionReceiver extends BroadcastReceiver {
         if (intent == null || !ACTION.equals(intent.getAction())) return;
         String op = intent.getStringExtra(EXTRA_OP);
         boolean queued = press(context, op);
-        OpenGymWidgetProvider.updateAll(context);
+        AndroGymWidgetProvider.updateAll(context);
         if (queued) WidgetBridgePlugin.eventQueued();
     }
 
     /** Applies one button to the stored state; true when it queued a set for the app. */
     static boolean press(Context context, String op) {
         synchronized (LOCK) {
-            SharedPreferences p = OpenGymWidgetProvider.prefs(context);
-            JSONObject lg = WidgetLogger.loggerOf(OpenGymWidgetProvider.snapshot(context));
+            SharedPreferences p = AndroGymWidgetProvider.prefs(context);
+            JSONObject lg = WidgetLogger.loggerOf(AndroGymWidgetProvider.snapshot(context));
             if (lg == null) return false;
             JSONObject stored = null;
             try { String s = p.getString(WidgetLogger.STATE, null); stored = s == null ? null : new JSONObject(s); } catch (Exception e) { stored = null; }
@@ -54,7 +54,7 @@ public class WidgetActionReceiver extends BroadcastReceiver {
 
     static void remove(Context context, java.util.Set<String> ids) {
         synchronized (LOCK) {
-            SharedPreferences p = OpenGymWidgetProvider.prefs(context);
+            SharedPreferences p = AndroGymWidgetProvider.prefs(context);
             p.edit().putString(WidgetLogger.EVENTS, WidgetLogger.without(events(p), ids).toString()).apply();
         }
     }

@@ -1,4 +1,4 @@
-// What every shared picture of openGym has in common: the two formats, the light and dark looks
+// What every shared picture of AndroGym has in common: the two formats, the light and dark looks
 // and the logo in the corner. Pure drawing, no DOM: the workout card (lib/workout-card.js, after a
 // workout and in History) and Your year (lib/wrapped-cards.js) both paint with it, and
 // lib/share-image.js gets the picture out of the app. No exercise picture or clip is ever drawn
@@ -122,7 +122,7 @@ export function drawBrand(ctx, { x, y, width, colors, family, size = 40, badge: 
   ctx.textAlign = 'left'
   ctx.font = `700 ${size}px ${family}`
   if ('letterSpacing' in ctx) ctx.letterSpacing = `${(-size * 0.036).toFixed(2)}px`
-  const textW = ctx.measureText('openGym').width
+  const textW = ctx.measureText('AndroGym').width
   const lockW = markH * MARK_ASPECT + gap + textW
   let lx = x
   if (badge) {

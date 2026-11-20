@@ -13,7 +13,7 @@ import org.json.JSONArray;
 /**
  * Hands the Home Screen widget what it shows (lib/widgets.js builds it, the same snapshot the
  * iPhone widgets get): kept in the app's own SharedPreferences, never synced or backed up anywhere
- * else, and every openGym widget drawn again with it (OpenGymWidgetProvider). The page writes only
+ * else, and every AndroGym widget drawn again with it (AndroGymWidgetProvider). The page writes only
  * when something the widgets show changed.
  *
  * Since v1.4.5 it also hands the page the sets logged on the widget (WidgetActionReceiver, lib/
@@ -45,8 +45,8 @@ public class WidgetBridgePlugin extends Plugin {
             return;
         }
         try {
-            OpenGymWidgetProvider.prefs(getContext()).edit().putString(OpenGymWidgetProvider.SNAPSHOT, json).apply();
-            OpenGymWidgetProvider.updateAll(getContext());
+            AndroGymWidgetProvider.prefs(getContext()).edit().putString(AndroGymWidgetProvider.SNAPSHOT, json).apply();
+            AndroGymWidgetProvider.updateAll(getContext());
             call.resolve();
         } catch (Exception e) {
             call.reject("could not write the widget data");
@@ -56,7 +56,7 @@ public class WidgetBridgePlugin extends Plugin {
     @PluginMethod
     public void drain(PluginCall call) {
         try {
-            JSONArray q = WidgetActionReceiver.events(OpenGymWidgetProvider.prefs(getContext()));
+            JSONArray q = WidgetActionReceiver.events(AndroGymWidgetProvider.prefs(getContext()));
             JSObject out = new JSObject();
             out.put("events", new JSArray(q.toString()));
             call.resolve(out);

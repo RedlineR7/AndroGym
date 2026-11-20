@@ -1011,7 +1011,7 @@ object WearStore {
         refreshJob?.cancel()
         refreshJob = scope.launch {
             delay(500)
-            try { TileService.getUpdater(app).requestUpdate(OpenGymTileService::class.java) } catch (_: Exception) {}
+            try { TileService.getUpdater(app).requestUpdate(AndroGymTileService::class.java) } catch (_: Exception) {}
             try {
                 ComplicationDataSourceUpdateRequester.create(app, ComponentName(app, ProgressComplicationService::class.java)).requestUpdateAll()
             } catch (_: Exception) {}

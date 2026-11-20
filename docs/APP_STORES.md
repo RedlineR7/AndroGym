@@ -1,14 +1,14 @@
-# openGym in Google Play and the App Store
+# AndroGym in Google Play and the App Store
 
-openGym ships to phones three ways, and to watches two more, all from the same code and the same version number:
+AndroGym ships to phones three ways, and to watches two more, all from the same code and the same version number:
 
 | | Where | Who installs updates | Built where |
 |---|---|---|---|
 | Android APK | GitHub release, opengym.ch | the app itself (Settings → About) | release machine |
 | Android, Google Play | Play Store | Google Play | release machine |
 | iPhone (+ Apple Watch) | App Store, TestFlight beta | the App Store | Mac runner (compile) + release machine (finish, sign, upload) |
-| Wear OS watch | Play Store (Wear OS closed test), `openGym-Wear-X.Y.Z.apk` on the GitHub release | Google Play, or by hand for the APK | release machine (`scripts/android/build-wear.sh`) |
-| Garmin watch | [Connect IQ Store](https://apps.garmin.com/apps/62e66310-66de-4bdd-8e40-5d2c0d853a08) | Garmin Connect | release machine (`openGym.iq`, uploaded by hand, see GARMIN.md) |
+| Wear OS watch | Play Store (Wear OS closed test), `AndroGym-Wear-X.Y.Z.apk` on the GitHub release | Google Play, or by hand for the APK | release machine (`scripts/android/build-wear.sh`) |
+| Garmin watch | [Connect IQ Store](https://apps.garmin.com/apps/62e66310-66de-4bdd-8e40-5d2c0d853a08) | Garmin Connect | release machine (`AndroGym.iq`, uploaded by hand, see GARMIN.md) |
 
 The two Android builds are flavours of one Gradle project (`frontend/android/app/build.gradle`):
 `sideload` keeps the updater (InstallPlugin, `REQUEST_INSTALL_PACKAGES`), `play` leaves both out,
@@ -54,9 +54,9 @@ cd gym-app        # the release checkout, at the release tag
 export ANDROID_HOME=/opt/android-sdk
 K=/root/.config/opengym
 scripts/android/build-release.sh $K/opengym-release.keystore $K/keystore.pass $K/key.alias ~/release
-#  → openGym-X.Y.Z.apk, openGym-Plus-X.Y.Z.apk, openGym-HD-X.Y.Z.apk (each + .sha256, and
+#  → AndroGym-X.Y.Z.apk, AndroGym-Plus-X.Y.Z.apk, AndroGym-HD-X.Y.Z.apk (each + .sha256, and
 #    SHA256SUMS) for the GitHub release (APK_ONLY=1: only these),
-#    openGym-X.Y.Z.aab for Google Play
+#    AndroGym-X.Y.Z.aab for Google Play
 ```
 
 Each is built from its own phone build: the **Standard** APK with the box-free 180 px animations
@@ -77,7 +77,7 @@ with the release notes from the changelog.
 The fork does not use `build-release.sh`: that script reads the maintainer's private quality media
 and emits the three APK sizes and the Play bundle upstream's listings need. AndroGym publishes one
 sideload APK with the repository's 180 px media, under a signing key that is not upstream's (which
-is what lets it sit beside openGym on one phone):
+is what lets it sit beside AndroGym on one phone):
 
 ```sh
 cd frontend
@@ -104,7 +104,7 @@ reproducible, so F-Droid ships it with our signature when we give it a matching 
 
 ```sh
 scripts/android/build-fdroid-reference.sh $K/opengym-release.keystore $K/keystore.pass $K/key.alias ~/release vX.Y.Z
-#  → openGym-FDroid-X.Y.Z.apk (+ .sha256): attach it to the GitHub release of vX.Y.Z
+#  → AndroGym-FDroid-X.Y.Z.apk (+ .sha256): attach it to the GitHub release of vX.Y.Z
 ```
 
 It builds in a fresh clone of the tag with JDK 21 and a clean environment, and signs without
@@ -115,7 +115,7 @@ makes F-Droid's copied signature fail. Without the file F-Droid's build of that 
 ### iPhone
 
 The IPA carries the app, the asset pack downloader extension (`AnimationPacksDownloader`), the
-widget extension (`OpenGymWidgets`: widgets and the Live Activity) and the Apple Watch app with its
+widget extension (`AndroGymWidgets`: widgets and the Live Activity) and the Apple Watch app with its
 own widget. Each is a separate bundle id with its own App Store provisioning profile.
 
 1. **Compile (CI).** The `iOS` workflow (`.github/workflows/ios.yml`, job `device-archive`) runs
@@ -128,7 +128,7 @@ own widget. Each is a separate bundle id with its own App Store provisioning pro
    ```sh
    EXT_PROFILE=downloader.mobileprovision WIDGETS_PROFILE=widgets.mobileprovision \
    WATCH_PROFILE=watch.mobileprovision WATCH_WIDGET_PROFILE=watch-widget.mobileprovision \
-   scripts/ios/finish-ipa.sh App-unsigned.ipa dist.p12 dist.pass openGym_AppStore.mobileprovision
+   scripts/ios/finish-ipa.sh App-unsigned.ipa dist.p12 dist.pass AndroGym_AppStore.mobileprovision
    ```
    It puts the phone bundle into the app, signs every bundle with its own profile's entitlements
    (App Group, HealthKit where the profile and the app ask for it), and refuses an IPA from
@@ -178,7 +178,7 @@ The full-quality files only ever travel from the release machine to Apple, like 
    run a closed test with at least 12 testers for 14 days in a row before it can publish to
    production; the Discord community is the obvious tester pool. An *organisation* account
    (needs a D-U-N-S number) skips that.
-2. Create the app: name openGym, default language English, free, no ads.
+2. Create the app: name AndroGym, default language English, free, no ads.
 3. **App signing:** choose to use your own key ("Use existing app signing key", Play's PEPK
    tool exports it encrypted). Then Play signs with the same key as the APK and people can
    switch from the APK to Play keeping their data. With a key Google generates, the two are
@@ -204,15 +204,15 @@ on the phone (Settings → Reset, or uninstall).
 
 1. Apple Developer Program (99 USD a year, as an individual; the seller name shown is your
    legal name).
-2. App Store Connect → new app "openGym: Workout Tracker" (plain "openGym" is taken as an App
-   Store name; the home screen still says openGym), bundle id `ch.opengym.app`. The iPhone app
+2. App Store Connect → new app "AndroGym: Workout Tracker" (plain "AndroGym" is taken as an App
+   Store name; the home screen still says AndroGym), bundle id `ch.opengym.app`. The iPhone app
    has its own bundle id because `ch.duartesantos.opengym` is held by another Apple team (an
    Xcode build of the public code reserves it); Android keeps `ch.duartesantos.opengym`.
 3. Signing material, all doable from Linux:
    - `openssl req -new -newkey rsa:2048 -nodes -keyout dist.key -out dist.csr -subj "/CN=Duarte Santos/emailAddress=…"`,
      upload the CSR under Certificates → Apple Distribution, download `distribution.cer`, then
      `openssl x509 -inform der -in distribution.cer -out dist.pem && openssl pkcs12 -export -legacy -inkey dist.key -in dist.pem -out dist.p12`.
-   - Profiles → an App Store Connect profile for `ch.opengym.app` → `openGym_AppStore.mobileprovision`,
+   - Profiles → an App Store Connect profile for `ch.opengym.app` → `AndroGym_AppStore.mobileprovision`,
      and one each for `ch.opengym.app.AnimationPacksDownloader`, `ch.opengym.app.widgets`,
      `ch.opengym.app.watchkitapp` and `ch.opengym.app.watchkitapp.widgets`. The app, the downloader,
      the widgets and the watch widget share the App Group `group.ch.opengym.app`; the app and the

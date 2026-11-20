@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * What one block of the Home Screen widget says (OpenGymWidgetProvider draws it): the snapshot the
+ * What one block of the Home Screen widget says (AndroGymWidgetProvider draws it): the snapshot the
  * app wrote (lib/widgets.js buildWidgetSnapshot, the same one the iPhone widgets read) and the kind
  * the widget was set to show, as plain text and a link. No Android in here, so the JVM tests can
  * run it (WidgetContentTest).
@@ -69,7 +69,7 @@ final class WidgetContent {
      */
     static WidgetContent of(String kindIn, JSONObject snap, String today, String emptyText) {
         String kind = validKind(kindIn);
-        if (snap == null) return new WidgetContent(kind, Icon.DUMBBELL, "openGym", "", emptyText, "opengym://home", null, 0);
+        if (snap == null) return new WidgetContent(kind, Icon.DUMBBELL, "AndroGym", "", emptyText, "opengym://home", null, 0);
         JSONObject labels = snap.optJSONObject("labels");
         switch (kind) {
             case "weight": {

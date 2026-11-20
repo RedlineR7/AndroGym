@@ -33,7 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OpenGymWear">
+        android:theme="@style/Theme.AndroGymWear">
 
         <uses-library android:name="com.google.android.wearable" android:required="false" />
 
@@ -47,7 +47,7 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:theme="@style/Theme.OpenGymWear">
+            android:theme="@style/Theme.AndroGymWear">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -89,7 +89,7 @@
 
         <!-- The Tile: the streak and today's plan, or the set up next while a workout runs. -->
         <service
-            android:name=".OpenGymTileService"
+            android:name=".AndroGymTileService"
             android:exported="true"
             android:label="@string/app_name"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">

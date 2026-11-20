@@ -25,14 +25,14 @@ import java.util.Map;
 import org.json.JSONObject;
 
 /**
- * openGym's Home Screen widget on Android: a row when it is one cell tall, one thing big at 2x2,
+ * AndroGym's Home Screen widget on Android: a row when it is one cell tall, one thing big at 2x2,
  * two side by side at 4x2 (Shape),
- * each picked when the widget is placed (OpenGymWidgetConfigure): the streak, the weight goal, this
+ * each picked when the widget is placed (AndroGymWidgetConfigure): the streak, the weight goal, this
  * week, the next workout, records or volume (WidgetContent). What it shows is the snapshot the app
  * wrote (WidgetBridgePlugin, lib/widgets.js), in the app's language and accent; light or dark with
  * the phone (values-night). A tap opens the screen it is about through the app's own links.
  */
-public class OpenGymWidgetProvider extends AppWidgetProvider {
+public class AndroGymWidgetProvider extends AppWidgetProvider {
     static final String PREFS = "opengym_widgets";
     static final String SNAPSHOT = "snapshot";
 
@@ -60,10 +60,10 @@ public class OpenGymWidgetProvider extends AppWidgetProvider {
         return context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
-    /** Every openGym widget on the Home Screen, drawn again (after the app wrote a new snapshot). */
+    /** Every AndroGym widget on the Home Screen, drawn again (after the app wrote a new snapshot). */
     static void updateAll(Context context) {
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-        int[] ids = mgr.getAppWidgetIds(new ComponentName(context, OpenGymWidgetProvider.class));
+        int[] ids = mgr.getAppWidgetIds(new ComponentName(context, AndroGymWidgetProvider.class));
         for (int id : ids) draw(context, mgr, id);
     }
 

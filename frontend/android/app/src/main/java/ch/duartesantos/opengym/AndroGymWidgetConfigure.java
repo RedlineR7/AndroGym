@@ -17,12 +17,12 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 /**
- * "What to show": opens when an openGym widget is placed, and again from its long-press menu on
+ * "What to show": opens when an AndroGym widget is placed, and again from its long-press menu on
  * Android 12 and later. Two lists, the widget's thing and, for the wide widget, the one beside it.
  * The words are the app's (the snapshot carries them in the app's language), English before the
  * app ever wrote one. Backing out leaves the widget unplaced, as Android expects.
  */
-public class OpenGymWidgetConfigure extends Activity {
+public class AndroGymWidgetConfigure extends Activity {
     private int widgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     @Override
@@ -33,12 +33,12 @@ public class OpenGymWidgetConfigure extends Activity {
         if (extras != null) widgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         if (widgetId == AppWidgetManager.INVALID_APPWIDGET_ID) { finish(); return; }
 
-        JSONObject snap = OpenGymWidgetProvider.snapshot(this);
+        JSONObject snap = AndroGymWidgetProvider.snapshot(this);
         JSONObject labels = snap == null ? null : snap.optJSONObject("labels");
         JSONObject kinds = labels == null ? null : labels.optJSONObject("kinds");
 
-        String first = WidgetContent.validKind(OpenGymWidgetProvider.prefs(this).getString(OpenGymWidgetProvider.kindKey(widgetId), null));
-        String second = WidgetContent.validKind(OpenGymWidgetProvider.prefs(this).getString(OpenGymWidgetProvider.secondKey(widgetId), WidgetContent.defaultSecond(first)));
+        String first = WidgetContent.validKind(AndroGymWidgetProvider.prefs(this).getString(AndroGymWidgetProvider.kindKey(widgetId), null));
+        String second = WidgetContent.validKind(AndroGymWidgetProvider.prefs(this).getString(AndroGymWidgetProvider.secondKey(widgetId), WidgetContent.defaultSecond(first)));
 
         int pad = dp(20);
         LinearLayout col = new LinearLayout(this);
@@ -72,11 +72,11 @@ public class OpenGymWidgetConfigure extends Activity {
     }
 
     private void save(String first, String second) {
-        OpenGymWidgetProvider.prefs(this).edit()
-                .putString(OpenGymWidgetProvider.kindKey(widgetId), first)
-                .putString(OpenGymWidgetProvider.secondKey(widgetId), second)
+        AndroGymWidgetProvider.prefs(this).edit()
+                .putString(AndroGymWidgetProvider.kindKey(widgetId), first)
+                .putString(AndroGymWidgetProvider.secondKey(widgetId), second)
                 .apply();
-        OpenGymWidgetProvider.draw(this, AppWidgetManager.getInstance(this), widgetId);
+        AndroGymWidgetProvider.draw(this, AppWidgetManager.getInstance(this), widgetId);
         setResult(RESULT_OK, new Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId));
         finish();
     }

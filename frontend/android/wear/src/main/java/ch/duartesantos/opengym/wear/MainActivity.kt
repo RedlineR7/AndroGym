@@ -22,7 +22,7 @@ import androidx.wear.ambient.AmbientLifecycleObserver
 import androidx.wear.compose.material3.AppScaffold
 import ch.duartesantos.opengym.wear.ui.Accent
 import ch.duartesantos.opengym.wear.ui.OgTimeText
-import ch.duartesantos.opengym.wear.ui.OpenGymTheme
+import ch.duartesantos.opengym.wear.ui.AndroGymTheme
 import ch.duartesantos.opengym.wear.ui.WearApp
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val s by WearStore.state.collectAsState()
             val dim by WearStore.ambient.collectAsState()
-            OpenGymTheme(accent = Accent.of(s.settings), ambient = dim, reduceMotion = reduceMotion.value, round = round) {
+            AndroGymTheme(accent = Accent.of(s.settings), ambient = dim, reduceMotion = reduceMotion.value, round = round) {
                 Box(Modifier.offset { (if (dim) BurnIn.offset(minute.intValue) else 0 to 0).let { (x, y) -> IntOffset(x.dp.roundToPx(), y.dp.roundToPx()) } }) {
                     AppScaffold(timeText = { OgTimeText() }) {
                         WearApp(onWorkoutShown = { onWorkout() })

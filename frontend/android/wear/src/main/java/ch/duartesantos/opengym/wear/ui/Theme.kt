@@ -17,7 +17,7 @@ import ch.duartesantos.opengym.wear.Hex
 import ch.duartesantos.opengym.wear.WatchSettings
 
 /*
- * openGym on the wrist, the same look as the Apple Watch (ios/App/Watch/Theme.swift): the app's
+ * AndroGym on the wrist, the same look as the Apple Watch (ios/App/Watch/Theme.swift): the app's
  * dark tokens (frontend/src/index.css), black page, grey surfaces one step up, and the accent the
  * app wears (the phone sends it, WatchSettings.accent/onAccent) only on the one thing to press.
  * Numbers big, tabular and bold; targets 48 dp or more.
@@ -73,7 +73,7 @@ val LocalReduceMotion = staticCompositionLocalOf { false }
 val LocalRound = staticCompositionLocalOf { true }
 
 @Composable
-fun OpenGymTheme(accent: Accent = Accent(), ambient: Boolean = false, reduceMotion: Boolean = false, round: Boolean = true,
+fun AndroGymTheme(accent: Accent = Accent(), ambient: Boolean = false, reduceMotion: Boolean = false, round: Boolean = true,
                  content: @Composable () -> Unit) {
     val scheme = ColorScheme(
         primary = accent.accent,

@@ -14,7 +14,7 @@ function server({ user = 'me', pass = 'pw', needsFolder = false, down = false } 
     if (down) throw new TypeError('Failed to fetch')
     const res = (status, text = '') => ({ ok: status >= 200 && status < 300, status, text: async () => text })
     if (headers.Authorization !== basicAuth(user, pass)) return res(401)
-    const name = decodeURIComponent(url.slice('https://dav.example.com/files/me/openGym/'.length))
+    const name = decodeURIComponent(url.slice('https://dav.example.com/files/me/AndroGym/'.length))
     if (method === 'MKCOL') { folder = true; return res(201) }
     if (!folder) return res(method === 'GET' ? 404 : 409)
     if (method === 'PUT') { files.set(name, body); return res(201) }
@@ -24,7 +24,7 @@ function server({ user = 'me', pass = 'pw', needsFolder = false, down = false } 
   }
   return { files, calls, fetchFn }
 }
-const URL_ = 'https://dav.example.com/files/me/openGym'
+const URL_ = 'https://dav.example.com/files/me/AndroGym'
 const S = { workouts: [{ id: 'w1', d: '2026-11-01', entries: [] }], routines: [], bodyweight: [] }
 
 describe('the folder address', () => {

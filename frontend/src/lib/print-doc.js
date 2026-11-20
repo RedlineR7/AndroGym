@@ -1,8 +1,8 @@
-// The paper side of openGym: one page shell every printout shares (the weekly plan, one routine,
+// The paper side of AndroGym: one page shell every printout shares (the weekly plan, one routine,
 // one workout, the performance report), and the one way to send it to a printer or a PDF.
 //
 // What every printout gets from here:
-//  - the openGym logo top left, the title, a line of facts, and who it is for and when;
+//  - the AndroGym logo top left, the title, a line of facts, and who it is for and when;
 //  - page numbers and opengym.ch in the bottom margin (CSS @page margin boxes: Chrome, Android's
 //    WebView, desktop Chrome/Edge; the iOS app draws the same line natively, PrintPlugin.swift).
 //    Desktop Firefox (checked with 158) and Safari drop margin boxes, so there the line is left
@@ -159,7 +159,7 @@ ${css}</style></head>
     ${factLine ? `<div class="facts">${factLine}</div>` : ''}
   </header>
   ${body}
-  <div class="end keep">${esc(t('Made with openGym'))} · opengym.ch${credit ? `<div class="credit" lang="en" dir="ltr">${esc(credit)}</div>` : ''}</div>
+  <div class="end keep">${esc(t('Made with AndroGym'))} · opengym.ch${credit ? `<div class="credit" lang="en" dir="ltr">${esc(credit)}</div>` : ''}</div>
 </div></body></html>`
 }
 
@@ -214,7 +214,7 @@ function printInFrame(html) {
  * suggested PDF file; Android refuses a job without one.
  */
 export function printDocument(html, name) {
-  if (MOBILE) return printHtml(html, name || 'openGym', printOptions()).catch(err => {
+  if (MOBILE) return printHtml(html, name || 'AndroGym', printOptions()).catch(err => {
     // A dismissed sheet stays quiet. A phone with no print service at all (#991) says so: the
     // store comes in through a dynamic import, since plain Node tests load this file too.
     if (err?.code !== 'no-service') return

@@ -14,7 +14,7 @@ import org.json.JSONObject;
  * The state is { base, pos, wi, r, sec }: `base` is the key of the snapshot's first set it was made
  * from (a new snapshot, one the app wrote after applying the taps, starts over), `pos` the set
  * shown, and the rest the numbers changed on it, absent while untouched. Log set queues an event
- * for the app and moves on to the next set. Pure: OpenGymWidgetProvider draws, WidgetActionReceiver
+ * for the app and moves on to the next set. Pure: AndroGymWidgetProvider draws, WidgetActionReceiver
  * stores; tested in WidgetLoggerTest.
  */
 final class WidgetLogger {

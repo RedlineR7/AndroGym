@@ -12,7 +12,7 @@ TestFlight beta) on an iPhone, the APK on Android. Then read
 |---|---|---|
 | **iPhone and iPad** | The [App Store](https://apps.apple.com/app/id6822275400). To test the next version early: the [public TestFlight beta](https://testflight.apple.com/join/RKATb61k) | the App Store or TestFlight |
 | **Apple Watch** | Comes with the iPhone app | with the iPhone app |
-| **Android, APK** | [GitHub release](https://github.com/DuarteSantos8/openGym/releases/latest) or [opengym.ch](https://opengym.ch). From v1.4.2 in three sizes: Standard (animations at 180 px), Plus (240 px) and HD (360 px, the biggest download) | the app itself, each size to its own kind |
+| **Android, APK** | [GitHub release](https://github.com/RedlineR7/AndroGym/releases/latest) or [opengym.ch](https://opengym.ch). From v1.4.2 in three sizes: Standard (animations at 180 px), Plus (240 px) and HD (360 px, the biggest download) | the app itself, each size to its own kind |
 | **Android, Google Play** | Coming: the account has to run a closed test first | Google Play, sharper animations as downloads |
 
 The APK and the Google Play app are signed with the same key, so a phone can move from one to
@@ -22,15 +22,15 @@ released is in [APP_STORES.md](APP_STORES.md).
 ### AndroGym (this fork)
 
 AndroGym is built from this repository under its own application id,
-`io.github.redliner7.androgym`, so it installs beside openGym rather than over it. Android treats
-it as a new app: it starts with an empty log, and an openGym log moves across with Settings → Data
+`io.github.redliner7.androgym`, so it installs beside AndroGym rather than over it. Android treats
+it as a new app: it starts with an empty log, and an AndroGym log moves across with Settings → Data
 & backup → **Export backup** (JSON, or the zip with photos and videos) and **Import backup** in
-AndroGym. It cannot be installed over an openGym that another key signed. The Wear OS app carries
+AndroGym. It cannot be installed over an AndroGym that another key signed. The Wear OS app carries
 the same id, which is what lets it pair with this phone app.
 
 ## How the phone app works
 
-openGym ships in two flavors from the same codebase:
+AndroGym ships in two flavors from the same codebase:
 
 | | **Self-hosted** (this repo's default) | **Mobile app** (`VITE_MOBILE=1`) |
 |---|---|---|
@@ -49,7 +49,7 @@ through the OS share sheet instead of a browser download.
 ### Connecting the app to your own server
 
 On first launch the app asks how you want to use it. Alongside the fully local mode above,
-you can instead **connect it to a self-hosted openGym server**: your data then lives there,
+you can instead **connect it to a self-hosted AndroGym server**: your data then lives there,
 synced the same way the browser PWA does, instead of only on the phone. This is a mode of the
 same app, not a different build or download.
 
@@ -70,10 +70,10 @@ or Settings → Account → **"Connect to my server"** later) to finish. Notes:
   you that http is not encrypted, so keep it to your own network. Your browser still needs a
   password to sign in there and make the code: passkeys only work over https (or `localhost`).
 - Pairing says your server "refused the app's request (CORS)", or that "a login page or proxy
-  rule replied instead of openGym", or fails with "Failed to fetch" on an older version, while
-  the browser works? Something in front of openGym is answering the app instead: a reverse proxy
+  rule replied instead of AndroGym", or fails with "Failed to fetch" on an older version, while
+  the browser works? Something in front of AndroGym is answering the app instead: a reverse proxy
   handling the CORS preflight itself, adding a second `Access-Control-Allow-Origin`, or SSO /
-  forward-auth on `/api/`. openGym answers the preflight and does its own sign-in; see
+  forward-auth on `/api/`. AndroGym answers the preflight and does its own sign-in; see
   [Phone app and CORS](SELF_HOSTING.md#phone-app-and-cors) for the fixes and a `curl` self-check.
 - The token lasts `SESSION_DAYS` (90 by default, see `docs/SELF_HOSTING.md`) and renews
   itself: every time the app starts, a token past half its life is swapped for a fresh one.
@@ -98,12 +98,12 @@ If your server sits behind [Cloudflare Access](https://developers.cloudflare.com
 
 1. In Zero Trust → Access → Service Auth, create a service token and note its Client ID and
    Client Secret.
-2. In the Access application for your openGym host, add a policy with the **Service Auth**
+2. In the Access application for your AndroGym host, add a policy with the **Service Auth**
    action that includes that token.
 3. In the application's **CORS settings**, enable **Bypass OPTIONS requests to origin**. The
    app runs on its own origin, so every request is preceded by a CORS preflight, and a
    preflight never carries the token. Without the bypass, Access refuses it and nothing
-   gets through. The openGym API answers the preflight itself and allows both headers.
+   gets through. The AndroGym API answers the preflight itself and allows both headers.
 4. In the app, before connecting: first-launch screen → **Connection settings** (or the
    **Cloudflare Access** button in the Connect sheet), enter your server's address and the two
    values, then pair as usual. They can be changed later under Settings → **Server & sync** →
@@ -126,7 +126,7 @@ status bar says so on every screen, and stays until the condition is gone:
 |---|---|---|
 | *Offline. Your changes are saved on this device…* | No answer at all: no network, the server is down, or it did not answer within 20 s (60 s for an upload). | Nothing, it syncs by itself once the server is reachable. **Try again** checks at once. |
 | *Your server answered with an error (HTTP 502)…* | The server (or the proxy in front of it) answered with an error. The code is the one the server sent. | Check the server and its proxy logs; **Try again** once it is back. A 413 means the proxy's upload limit is too small (`client_max_body_size`). |
-| *Your server's address answered with something other than openGym (HTTP 200)…* | Something else answered in the server's place, typically a proxy's sign-in page or a catch-all that serves the web app for `/api/*`. | Let `/api/*` through to the openGym API unchanged, including the `Authorization` header. |
+| *Your server's address answered with something other than AndroGym (HTTP 200)…* | Something else answered in the server's place, typically a proxy's sign-in page or a catch-all that serves the web app for `/api/*`. | Let `/api/*` through to the AndroGym API unchanged, including the `Authorization` header. |
 | *Your server no longer accepts this phone…* | The server refused the phone's token (401): "sign out everywhere", the account disabled, a `data/secret` that was replaced, a token older than `SESSION_DAYS`, or a proxy with its own login that rejects `Authorization: Bearer`. | **Pair again**: in a signed-in browser open Settings → "Pair the mobile app" and enter the new code. The address is already filled in. |
 | *This phone is no longer paired with your server…* | A phone that an earlier version of the app unpaired by itself after its token was refused. The address is gone. | **Pair again**, typing the address. |
 | *On this phone only, not connected to a server* | Local mode, chosen at first launch or after Disconnect. Said quietly. | Nothing, or **Connect** to pair with a server. |
@@ -151,7 +151,7 @@ Where the phone keeps things, in case you ever need them by hand:
   belongs to: a paired phone only ever takes the file back for that account.
 - `opengym-stash.json`, same directory: changes kept by "Disconnect anyway" or by another
   account pairing, waiting for their server and account.
-- `Documents/openGym/opengym-backup-YYYY-MM-DD.json`: only with Settings → Data & backup → **Auto-backup on
+- `Documents/AndroGym/opengym-backup-YYYY-MM-DD.json`: only with Settings → Data & backup → **Auto-backup on
   changes** switched on: a dated copy after every finished workout or edited routine, in a
   folder of its own under the phone's Documents folder, where a file manager or a sync app
   (Syncthing, a cloud folder) can reach it without taking the rest of Documents along. One
@@ -163,7 +163,7 @@ Where the phone keeps things, in case you ever need them by hand:
   system folder picker (a sync app's folder, an SD card) and the copies go there instead,
   pruned to the same 14. The choice belongs to this phone and does not sync. If the folder
   stops accepting copies (the permission revoked, the folder deleted), they go to
-  `Documents/openGym` again and Settings says so until you choose the folder again or tap
+  `Documents/AndroGym` again and Settings says so until you choose the folder again or tap
   **Use default folder**.
 
 ### Photos and videos of your own exercises
@@ -207,7 +207,7 @@ uses the same file input, ingest, folder and sync as the photos above; what is p
   `MediaStore.ACTION_VIDEO_CAPTURE` to the camera app, which needs the `<queries>` entry for that
   action in the manifest since Android 11 (without it the button opens the file picker). On
   Android the camera app may also keep its own copy in the gallery; that copy is the camera
-  app's, not openGym's.
+  app's, not AndroGym's.
 - **Length and size:** the server's `videoSec` and `videoMB` from `/api/config`, or 60 s and
   100 MB in local mode. A longer video is refused before it is kept. A big one is first made
   smaller on the device (lib/video-shrink.js, v1.4.5): it plays once, unseen, onto a canvas at
@@ -263,7 +263,7 @@ that.
   iPhone sleep analysis, resting heart rate, HRV (SDNN) and step count from Apple Health. Each is
   asked for only when its switch is turned on, after an explanation in the app.
   No background permission.
-- **No duplicates.** Every record carries openGym's own id as its `clientRecordId`
+- **No duplicates.** Every record carries AndroGym's own id as its `clientRecordId`
   (`opengym-w-<workout id>`, `opengym-bw-<day>`), so writing it again replaces it. An edited workout
   or weigh-in is written again; a deleted one is removed from Health Connect.
 - **This phone only.** Whether it is on, and a fingerprint of each record already written, live in
@@ -273,7 +273,7 @@ that.
 - **When it writes:** after each save (finishing a workout, a weigh-in, an edit), when the app comes
   back to the foreground, and once at launch. While it is off, a save costs nothing: the file is
   read once at launch and kept in memory.
-- **Turning it off** asks whether to keep what openGym wrote in Health Connect, as the user's own
+- **Turning it off** asks whether to keep what AndroGym wrote in Health Connect, as the user's own
   data, or to remove exactly those records.
 - **Where it shows:** Android 14 and later have Health Connect built in. On Android 9–13 it is an
   app of its own, and the card offers its store page until it is installed. Below Android 9 (the
@@ -289,7 +289,7 @@ that.
 
 Worth checking on a real device after changes here: turning it on shows Health Connect's own
 permission screen; a finished workout appears in Health Connect within a few seconds; deleting it
-in openGym removes it there; turning it off with "remove" leaves no openGym record behind.
+in AndroGym removes it there; turning it off with "remove" leaves no AndroGym record behind.
 
 #### Reading back: heart rate and weigh-ins (v1.4.3, #544, #127)
 
@@ -312,9 +312,9 @@ default, each independent of writing and of the other:
   permission), afterwards from the newest seen minus two days. `lib/health-read.js` `mergeWeighIns`
   keeps every sample with its time as a weigh-in of its day (#859, `lib/weigh-ins.js`), under an id
   made from the hub's own record id, so two phones reading the same sample add it once. It skips
-  openGym's own records (`clientRecordId` `opengym-*`, origin `ch.duartesantos.opengym*`), a sample
-  at a minute the day already has a weigh-in for (typed in, or read before), one removed in openGym
-  (the day's `gone`), and a whole day deleted in openGym after it was measured, and converts to lb
+  AndroGym's own records (`clientRecordId` `opengym-*`, origin `ch.duartesantos.opengym*`), a sample
+  at a minute the day already has a weigh-in for (typed in, or read before), one removed in AndroGym
+  (the day's `gone`), and a whole day deleted in AndroGym after it was measured, and converts to lb
   for an lb profile. Imported weigh-ins carry `src` and are never written back (`healthRecords`
   leaves them out); typed ones stand beside them, and the daily-value setting picks the day's number.
 - **Foreground only.** Reads run at launch, on resume and after saves, never in the background.
@@ -353,7 +353,7 @@ iPhone runs one, the same `HKWorkoutSession` + `HKLiveWorkoutBuilder` the Apple 
   between; the sets are worked out when it wakes.
 - **Live readout:** a small "♥ 128" in the workout header while a reading is under a minute old.
 - **Apple Health:** finishing saves the live workout (`finishWorkout`, sync id `opengym-w-<id>`,
-  version 1, the workout's name as `OpenGymTitle`). `AppleHealthPlugin.saveSession` asks
+  version 1, the workout's name as `AndroGymTitle`). `AppleHealthPlugin.saveSession` asks
   `PhoneWorkoutLedger` and skips its post-hoc write for it, as it does for the watch's copy (it waits
   up to 20 s for a save still in flight). Discarding drops it (`discardWorkout`).
 - **AirPods out:** readings stop, the session keeps going, they resume when the buds go back in.
@@ -521,7 +521,7 @@ opens the Start screen (or the running workout).
   goes away with the check (Android holds a new foreground-service notification back for up to
   10 s, so a check that ends quickly may never show one). Catch: Android 12+ lets a background app start a foreground service
   only with an exemption, and a proximity alert is not one (checked on the emulator:
-  `ForegroundServiceStartNotAllowedException`). It works with openGym's battery use on
+  `ForegroundServiceStartNotAllowedException`). It works with AndroGym's battery use on
   **Unrestricted** (started directly) or with "Alarms & reminders" allowed (an exact alarm half a
   second later starts it); the gym page shows this as "Quick arrival check" and leads to the app's
   settings. Without either, the gym's own alert still fires on the system's schedule. Trade-offs
@@ -571,9 +571,9 @@ created like a plan file's. A newer link format than the app reads asks for an u
 
 | Where | Link | |
 | --- | --- | --- |
-| Website | `https://opengym.ch/r#P` | `website/r/index.html` (served at /r/): the routine by name and sets, Open in openGym, Get the app, Open in the web app (your server or the demo) |
+| Website | `https://opengym.ch/r#P` | `website/r/index.html` (served at /r/): the routine by name and sets, Open in AndroGym, Get the app, Open in the web app (your server or the demo) |
 | Android | same link | VIEW filter on `MainActivity` (https, opengym.ch, path `/r` and `/r/`, `autoVerify`), so it opens the app directly once opengym.ch serves `/.well-known/assetlinks.json` with the app's signing certificates (Play and sideload). Until then Android may show the page or ask |
-| App | `opengym://r#P` | the website's Open in openGym; the `opengym` scheme is already registered (CFBundleURLTypes, the VIEW filter for `opengym:`). Read through `@capacitor/app`'s `appUrlOpen` and `getLaunchUrl` (`useRoutineLinks`, waits until the app is set up) |
+| App | `opengym://r#P` | the website's Open in AndroGym; the `opengym` scheme is already registered (CFBundleURLTypes, the VIEW filter for `opengym:`). Read through `@capacitor/app`'s `appUrlOpen` and `getLaunchUrl` (`useRoutineLinks`, waits until the app is set up) |
 | Web app | `<server>/#/r/P` | read before the router sends the unknown route to /home, then the address goes back to `#/plan` |
 
 iPhone: without associated domains the https link opens the page in Safari, one more tap to the
@@ -582,7 +582,7 @@ app. Adding `applinks:opengym.ch` (see the NFC notes below) would cover `/r*` to
 ### Library routines and Plan → Scan a QR code (v1.4.5)
 
 A whole routine from the library (docs/ROUTINES_LIBRARY.md) opens the app like a Spotify link:
-`https://opengym.ch/routines/<slug>/`, tapped or scanned with the phone camera, starts openGym,
+`https://opengym.ch/routines/<slug>/`, tapped or scanned with the phone camera, starts AndroGym,
 which fetches `/routines/plans/<slug>.opengym-plan.json` natively (`nativeFetch`, so no CORS in the
 apps), reads it with `parsePlan` and shows the Plan import sheet with **From <author>** (the plan
 file's `from`, or the index entry for older files). Offline, a missing routine or a broken file:
@@ -601,7 +601,7 @@ the Play/sideload and iPhone apps, `CameraScan.jsx` with jsQR (or the browser's
 `BarcodeDetector`) on the web and in the F-Droid build, which has no ML Kit (`webScanner()`).
 What it read goes where a tap would (`src/lib/scan-route.js`): `opengym.ch/r#…` to the routine
 preview, a library page to the import sheet, a sticker link (`opengym.ch/nfc?…`, `opengym://…`)
-to the sticker's action, anything else is shown back in a toast ("That's not an openGym code").
+to the sticker's action, anything else is shown back in a toast ("That's not an AndroGym code").
 `src/lib/app-links.test.js` matches the manifest's filters (a port of Android's simple glob) and
 the AASA components against the paths the app handles.
 
@@ -629,7 +629,7 @@ too. Machine stickers come from an exercise's details → **Write NFC sticker fo
   web links and universal links, never custom schemes. The app has **no associated domains yet**,
   so on an iPhone the tap shows a banner that opens `opengym.ch/nfc` in Safari, and that page
   (`website/nfc/index.html`, served at /nfc) hands the query to the app as `opengym://nfc?...` (CFBundleURLTypes in
-  Info.plist, delivered through `@capacitor/app`'s `appUrlOpen`). A phone without openGym lands on
+  Info.plist, delivered through `@capacitor/app`'s `appUrlOpen`). A phone without AndroGym lands on
   the same page. To make it one tap on iPhone later: enable Associated Domains on the app id, add
   `applinks:opengym.ch` to `App.entitlements`, and serve `/.well-known/apple-app-site-association`
   for `/nfc*` on opengym.ch.
@@ -662,12 +662,12 @@ show up in Siri, Spotlight and the Shortcuts app with no setup:
 
 | Phrase | Intent | What happens |
 | --- | --- | --- |
-| "Start my workout in openGym" | `StartWorkoutIntent` (opens the app) | hands `opengym://start?today=1` to Capacitor like any link: today's plan through the widget's Start path (`lib/widget-links.js`, weigh-in step included), the running workout if there is one, Home on a rest day |
-| "Log my weight in openGym" | `LogWeightIntent` (stays closed) | asks for the number, in the profile's unit from the widget snapshot, 20 to 700 kg or 44 to 1500 lb; writes `{ id, w, unit, at, d }` to `voice.pendingWeighIns` in the App Group's defaults and says "Logged 78.2 kg" |
-| "What's my workout today in openGym" | `TodayWorkoutIntent` (stays closed) | answers from `widget.json` (the widget snapshot, `lib/widgets.js`): the running workout, today's plan, done, or the rest day and what's next |
-| "How's my streak in openGym" | `StreakIntent` (stays closed) | the week streak and whether this week counts yet, from the same snapshot |
+| "Start my workout in AndroGym" | `StartWorkoutIntent` (opens the app) | hands `opengym://start?today=1` to Capacitor like any link: today's plan through the widget's Start path (`lib/widget-links.js`, weigh-in step included), the running workout if there is one, Home on a rest day |
+| "Log my weight in AndroGym" | `LogWeightIntent` (stays closed) | asks for the number, in the profile's unit from the widget snapshot, 20 to 700 kg or 44 to 1500 lb; writes `{ id, w, unit, at, d }` to `voice.pendingWeighIns` in the App Group's defaults and says "Logged 78.2 kg" |
+| "What's my workout today in AndroGym" | `TodayWorkoutIntent` (stays closed) | answers from `widget.json` (the widget snapshot, `lib/widgets.js`): the running workout, today's plan, done, or the rest day and what's next |
+| "How's my streak in AndroGym" | `StreakIntent` (stays closed) | the week streak and whether this week counts yet, from the same snapshot |
 
-Before the app has written a snapshot (never opened) the closed ones say "Open openGym once, then
+Before the app has written a snapshot (never opened) the closed ones say "Open AndroGym once, then
 ask me again" and log nothing: without the profile's unit a number means nothing.
 
 The page brings pending weigh-ins in when it starts and whenever it comes back to the foreground,
@@ -764,19 +764,19 @@ needs its activity-alias in `AndroidManifest.xml`, its name in `AppIcons.java` a
 
 ## Distributing your own build
 
-The signed APK stays the way to get openGym on Android without a store, and it updates itself.
+The signed APK stays the way to get AndroGym on Android without a store, and it updates itself.
 The [App Store app](https://apps.apple.com/app/id6822275400) and the
 Google Play build come from the same code; how they are built and uploaded is in
 [APP_STORES.md](APP_STORES.md).
 
 ### Android: sideload the APK
 
-Every release has three signed APKs on [the GitHub release](https://github.com/DuarteSantos8/openGym/releases),
+Every release has three signed APKs on [the GitHub release](https://github.com/RedlineR7/AndroGym/releases),
 each with its `.sha256` beside it, and [opengym.ch](https://opengym.ch) links to all three:
 
-- **`openGym-X.Y.Z.apk` (Standard):** the exercise animations built in at 180 px, about 315 MB.
-- **`openGym-Plus-X.Y.Z.apk` (Plus):** the same app with 240 px animations, about 424 MB.
-- **`openGym-HD-X.Y.Z.apk` (HD):** the same app with 360 px animations, about 760 MB.
+- **`AndroGym-X.Y.Z.apk` (Standard):** the exercise animations built in at 180 px, about 315 MB.
+- **`AndroGym-Plus-X.Y.Z.apk` (Plus):** the same app with 240 px animations, about 424 MB.
+- **`AndroGym-HD-X.Y.Z.apk` (HD):** the same app with 360 px animations, about 760 MB.
 
 Same app id, same key: install one over another and the data stays. The in-app updater keeps
 each on its own kind. Android asks you to allow installs from the browser the first time; that's
@@ -806,7 +806,7 @@ keytool -genkeypair -keystore my.keystore -alias opengym -keyalg RSA -validity 1
 
 # align + sign (zipalign/apksigner ship with the Android SDK build-tools)
 zipalign -f -p 4 app-sideload-release-unsigned.apk aligned.apk
-apksigner sign --ks my.keystore --ks-key-alias opengym --out openGym.apk aligned.apk
+apksigner sign --ks my.keystore --ks-key-alias opengym --out AndroGym.apk aligned.apk
 ```
 
 ### iPhone: build it yourself
@@ -832,7 +832,7 @@ web assets; `scripts/ios/finish-ipa.sh` adds them and signs it on the release ma
   `build.gradle` disagree. The full release list is in [APP_STORES.md](APP_STORES.md).
 - Don't push a version tag you don't mean to release: the published release is what builds the
   images (`docker-publish.yml`).
-- **License:** openGym is AGPL-3.0, which by itself sits badly with app-store terms of
+- **License:** AndroGym is AGPL-3.0, which by itself sits badly with app-store terms of
   service. `NOTICE.md` carries an app-store exception (an additional permission under
   AGPL §7) granted by the copyright holder, and the [CLA](../CLA.md) covers contributions.
 - The app requests notification permission when the workout-day reminder is switched on,

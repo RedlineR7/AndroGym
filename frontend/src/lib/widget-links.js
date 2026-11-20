@@ -12,7 +12,7 @@
 //
 // iOS: the widget's widgetURL / Link (ios/App/App/WidgetViews.swift), the scheme registered in
 // Info.plist. Android: the widget's PendingIntent, an explicit intent to MainActivity carrying the
-// same link as its data (OpenGymWidgetProvider.java). Capacitor's App plugin hands it to the page
+// same link as its data (AndroGymWidgetProvider.java). Capacitor's App plugin hands it to the page
 // as appUrlOpen, or as the launch URL when the tap started the app.
 //
 // Any app could open such a link too. None of them does more than a tap in the app would: a

@@ -24,7 +24,7 @@ import com.google.common.util.concurrent.ListenableFuture
  *   workout      its name, the sets so far as a ring, the set up next; a tap goes back in
  * Plain text and numbers, no media. Refreshed by the app whenever its state changes.
  */
-class OpenGymTileService : TileService() {
+class AndroGymTileService : TileService() {
     override fun onTileRequest(requestParams: RequestBuilders.TileRequest): ListenableFuture<TileBuilders.Tile> {
         val s = WearStore.peek(this)
         val c = Lang.wrap(this, s.settings.lang)

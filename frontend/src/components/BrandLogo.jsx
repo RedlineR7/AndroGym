@@ -1,4 +1,4 @@
-// The openGym logo, as in assets/logo: the mark (five plain rectangles on a 352×174 grid, square
+// The AndroGym logo, as in assets/logo: the mark (five plain rectangles on a 352×174 grid, square
 // corners, brand green) and the lockup (mark, then "open" plus "Gym" in brand green). Brand colours,
 // not the accent: the accent is the user's, the logo is not. Never mirrored in RTL.
 

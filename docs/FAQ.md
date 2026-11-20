@@ -4,7 +4,7 @@ Short answers, with a link to the long one.
 
 ### What does it cost?
 
-Nothing. openGym is open source under the AGPL: no subscription, no paid tier, no ads. If you'd like
+Nothing. AndroGym is open source under the AGPL: no subscription, no paid tier, no ads. If you'd like
 to support it anyway, there's [Buy Me a Coffee](https://buymeacoffee.com/duartesantos).
 
 ### Do I need my own server?
@@ -20,9 +20,9 @@ No, there are three ways to use it:
 
 ### Is there an iPhone app?
 
-Yes: [openGym is in the App Store](https://apps.apple.com/app/id6822275400), for iPhone and Apple
+Yes: [AndroGym is in the App Store](https://apps.apple.com/app/id6822275400), for iPhone and Apple
 Watch, in every App Store country. It works on the phone alone or connected to your own server.
-You can also add a self-hosted openGym to your home screen from Safari (a full PWA that works
+You can also add a self-hosted AndroGym to your home screen from Safari (a full PWA that works
 offline), or build the app onto your own phone with Xcode; both are in [MOBILE.md](MOBILE.md).
 
 ### Is it on Google Play?
@@ -31,18 +31,18 @@ In closed testing since November 2026: Google wants 12 testers for 14 days befor
 in. Join the [tester group](https://groups.google.com/g/opengym-testers/about), then
 [opt in](https://play.google.com/apps/testing/ch.duartesantos.opengym). Until it is public the signed
 APK is the way to go. It's published with a `.sha256` next to every release, comes in three sizes
-(Standard, Plus, HD) and updates itself, plus openGym Offline, a build with no internet permission at
-all. Get it from the [latest release](https://github.com/DuarteSantos8/openGym/releases/latest) or
+(Standard, Plus, HD) and updates itself, plus AndroGym Offline, a build with no internet permission at
+all. Get it from the [latest release](https://github.com/RedlineR7/AndroGym/releases/latest) or
 [opengym.ch](https://opengym.ch).
 
 ### Which watches work?
 
 Three, with one design: the Apple Watch (it comes with the App Store app), Wear OS watches (the
-Play test, or `openGym-Wear-X.Y.Z.apk` from the GitHub release next to the phone APK, see
+Play test, or `AndroGym-Wear-X.Y.Z.apk` from the GitHub release next to the phone APK, see
 [WEAR_OS.md](WEAR_OS.md)) and Garmin watches (the
-[Connect IQ Store](https://apps.garmin.com/apps/62e66310-66de-4bdd-8e40-5d2c0d853a08), with openGym
+[Connect IQ Store](https://apps.garmin.com/apps/62e66310-66de-4bdd-8e40-5d2c0d853a08), with AndroGym
 1.4.5 or later on the phone, see [GARMIN.md](GARMIN.md)). The phone runs the workout and the watch
-follows it. The F-Droid build and openGym Offline have no watch link.
+follows it. The F-Droid build and AndroGym Offline have no watch link.
 
 ### Where is my data?
 
@@ -58,7 +58,7 @@ inside the web image, so not even those are downloaded. The AI coach, if an admi
 the training data it needs to the provider you configured; [AI_COACH.md](AI_COACH.md) lists exactly
 what. Push notifications go through your browser's push service, as all web push does.
 
-### Was openGym written with AI?
+### Was AndroGym written with AI?
 
 It's developed with [Claude Code](https://claude.com/claude-code), Anthropic's coding agent, and a
 large share of the code, tests and docs is drafted that way. The maintainer decides what goes in,
@@ -113,12 +113,12 @@ an exercise and something measured. See [DATA_IMPORTS.md](DATA_IMPORTS.md).
 ### Can I reuse the exercise images in my own project?
 
 No. They are © Aliaksandr Makatserchyk, Gym visual, licensed for use in openGym only and not covered
-by openGym's license. Anything outside openGym needs your own licence from
+by AndroGym's license. Anything outside AndroGym needs your own licence from
 [gymvisual.com](https://gymvisual.com/). Details in [NOTICE.md](../NOTICE.md). The exercise text in
-[catalogue/](../catalogue/README.md) is a different story: that's openGym's, and fixes are welcome.
+[catalogue/](../catalogue/README.md) is a different story: that's AndroGym's, and fixes are welcome.
 
 ### Where do I ask something that isn't here?
 
 The [Discord](https://discord.gg/e62jY6fwVb) for a quick answer,
-[Discussions](https://github.com/DuarteSantos8/openGym/discussions) if the next person should be
-able to find it, [Issues](https://github.com/DuarteSantos8/openGym/issues) for a bug.
+[Discussions](https://github.com/RedlineR7/AndroGym/discussions) if the next person should be
+able to find it, [Issues](https://github.com/RedlineR7/AndroGym/issues) for a bug.

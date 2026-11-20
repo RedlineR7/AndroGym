@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The Home Screen widget (OpenGymWidgetProvider): its colours in light mode (values-night has
+<!-- The Home Screen widget (AndroGymWidgetProvider): its colours in light mode (values-night has
      the dark ones), the words of the widget picker, and the configure screen's fallbacks. What a
      widget shows is in the app's language: the app writes those words with the data. -->
 <resources>

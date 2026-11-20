@@ -1,4 +1,4 @@
-# openGym on Wear OS
+# AndroGym on Wear OS
 
 A watch app for Wear OS 3 and later: Samsung Galaxy Watch 4 and newer, Pixel Watch, OnePlus Watch,
 TicWatch, Fossil Gen 6 and the rest. It is the Apple Watch app's twin: the phone stays the source
@@ -7,7 +7,7 @@ routine by itself.
 
 **Status: beta since v1.4.4.** It builds, its tests pass and it runs end to end on the Wear OS
 emulators against the phone's real sync code, but it has met few real watches yet.
-On the watch it is labelled "openGym Beta"; on Google Play it ships to the Wear OS closed-testing
+On the watch it is labelled "AndroGym Beta"; on Google Play it ships to the Wear OS closed-testing
 track first. Drop the label (`app_name` in `wear/wear-strings.mjs`) once testers confirm it.
 
 ## What it does
@@ -110,9 +110,9 @@ with the same package name **and the same signing key**, so:
 
 | Phone app | Watch app |
 | --- | --- |
-| Google Play | Play Store on the watch → "Apps on your phone" → openGym |
-| The APK from opengym.ch / GitHub | `openGym-Wear-<version>.apk` of the same release (same key) |
-| F-Droid, openGym Offline | none: no Google Play services, no Wear OS link |
+| Google Play | Play Store on the watch → "Apps on your phone" → AndroGym |
+| The APK from opengym.ch / GitHub | `AndroGym-Wear-<version>.apk` of the same release (same key) |
+| F-Droid, AndroGym Offline | none: no Google Play services, no Wear OS link |
 
 A watch with the other one looks to the phone exactly like a watch without the app. Settings →
 Wear OS watch on the phone says which of the two you need.
@@ -122,18 +122,18 @@ Sideloading the APK (Galaxy Watch 4 and newer, Pixel Watch):
 1. On the watch: Settings → About watch → Software → tap "Software version" seven times, then
    Settings → Developer options → ADB debugging on, Wireless debugging on. Note the IP and port.
 2. On a computer in the same Wi-Fi: `adb pair <ip>:<pair-port>` (the code is on the watch), then
-   `adb connect <ip>:<port>` and `adb install openGym-Wear-<version>.apk`. No computer? A
+   `adb connect <ip>:<port>` and `adb install AndroGym-Wear-<version>.apk`. No computer? A
    sideloading app on the phone such as Wear Installer does the same over wireless debugging.
-3. Open openGym on the phone once, then on the watch. Settings → Wear OS watch on the phone should
-   say "openGym is on your watch and in reach" and, a moment later, when it last heard from the watch.
+3. Open AndroGym on the phone once, then on the watch. Settings → Wear OS watch on the phone should
+   say "AndroGym is on your watch and in reach" and, a moment later, when it last heard from the watch.
 
 If it does not connect:
 
-- "Your watch is here, openGym isn't on it yet" although it is installed: the two apps are from
+- "Your watch is here, AndroGym isn't on it yet" although it is installed: the two apps are from
   different sources (different keys). Install the matching one.
-- "Not synced yet" on the watch: open openGym on the phone once. The routines come with the first snapshot.
+- "Not synced yet" on the watch: open AndroGym on the phone once. The routines come with the first snapshot.
 - Sets arrive only when the phone app is opened: the phone keeps the app from running in the
-  background (Samsung: Settings → Apps → openGym → Battery → Unrestricted, and take it off "Deep
+  background (Samsung: Settings → Apps → AndroGym → Battery → Unrestricted, and take it off "Deep
   sleeping apps"). Nothing is lost either way: the sets wait on the watch and in the Data Layer.
 - No heart rate, or no rest buzz with the screen off: allow the sensor permission the watch asks
   for at the first workout. Without it the workout service may not run in the background.
@@ -220,7 +220,7 @@ The watch app goes into the phone app's listing (same package), as its own bundl
    factor → Wear OS**, and accept the Wear OS terms.
 2. Store listing → the Wear OS section: at least one Wear OS screenshot (384 × 384 or larger,
    round content on a square canvas) and, optionally, a Wear-specific description.
-3. Upload `openGym-Wear-<version>.aab` to the **Wear OS** track (closed testing first; Wear OS has
+3. Upload `AndroGym-Wear-<version>.aab` to the **Wear OS** track (closed testing first; Wear OS has
    its own dedicated tracks), with the same release notes.
 4. Data safety: unchanged in kind (heart rate stays on the device and goes only to the user's own
    phone app), but add "Health info: heart rate" as collected, not shared, if the review asks.

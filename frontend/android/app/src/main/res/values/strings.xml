@@ -3,7 +3,7 @@
     <string name="app_name">AndroGym</string>
     <string name="title_activity_main">AndroGym</string>
     <string name="package_name">io.github.redliner7.androgym</string>
-    <string name="custom_url_scheme">ch.duartesantos.opengym</string>
+    <string name="custom_url_scheme">io.github.redliner7.androgym</string>
     <string name="rest_countdown_channel_name">Rest countdown</string>
     <string name="rest_channel_name">Rest timer</string>
     <string name="rest_quiet_channel_name">Rest timer, without vibration</string>
