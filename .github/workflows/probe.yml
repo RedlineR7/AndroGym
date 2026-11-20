@@ -30,20 +30,36 @@ jobs:
         run: |
           npm ci --ignore-scripts --no-audit --no-fund >/dev/null
           npm run build:mobile >/dev/null 2>&1
-      - name: Gradle, quiet on success and verbose only on failure
+      # android.yml: the signed-or-unsigned sideload release APK.
+      - name: Sideload release, tail only on failure
         working-directory: frontend/android
         run: |
           set +e
-          ./gradlew --no-daemon --console=plain testSideloadDebugUnitTest assembleSideloadDebug :wear:compileReleaseKotlin > /tmp/g.log 2>&1
+          ./gradlew --no-daemon --console=plain assembleSideloadRelease > /tmp/rel.log 2>&1
           rc=$?
           if [ "$rc" -ne 0 ]; then
-            echo "gradle exited $rc"
+            echo "assembleSideloadRelease exited $rc"
             echo "--- environment ---"
             java -version 2>&1 | head -2
             echo "ANDROID_HOME=$ANDROID_HOME"
             ls "$ANDROID_HOME/platforms" "$ANDROID_HOME/build-tools" 2>&1 | tail -8
             echo "--- tail of the Gradle log ---"
-            tail -60 /tmp/g.log
+            tail -50 /tmp/rel.log
             exit 1
           fi
-          echo "gradle ok"; tail -4 /tmp/g.log
+          echo "release ok"; tail -3 /tmp/rel.log
+
+      # test.yml's android job: the other flavours and the watch app.
+      - name: Other flavours and the watch, tail only on failure
+        working-directory: frontend/android
+        run: |
+          set +e
+          ./gradlew --no-daemon --console=plain compilePlayDebugJavaWithJavac assembleFdroidRelease assembleOfflineDebug :wear:testDebugUnitTest > /tmp/flav.log 2>&1
+          rc=$?
+          if [ "$rc" -ne 0 ]; then
+            echo "flavours exited $rc"
+            echo "--- tail of the Gradle log ---"
+            tail -50 /tmp/flav.log
+            exit 1
+          fi
+          echo "flavours ok"; tail -3 /tmp/flav.log
