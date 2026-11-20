@@ -43,7 +43,7 @@ export function probeMarks(probe) {
   return { s: id => mark('s', id), e: id => mark('e', id), h: id => mark('h', id) }
 }
 
-// The logo's mark (assets/logo/opengym-mark.svg): five plain rectangles in brand green, beside "open"
+// The logo's mark (assets/logo/opengym-mark.svg): five plain rectangles in brand green, beside "Andro"
 // plus "Gym" in brand green, the light lockup of assets/logo/opengym-logo-light.svg.
 export const LOGO_SVG = '<svg class="logo-mark" viewBox="80 169 352 174" aria-hidden="true">'
   + '<g fill="#a3e635"><rect x="80" y="242" width="352" height="28"/><rect x="80" y="199" width="36" height="114"/>'
@@ -153,7 +153,7 @@ export function printShell({ title, kicker = '', facts = [], owner = '', date, b
 ${css}</style></head>
 <body><div class="doc">
   <header class="mast keep">
-    <div class="mast-top"><div class="brand">${LOGO_SVG}<span>open<span class="g">Gym</span></span></div><div class="mast-meta">${meta}</div></div>
+    <div class="mast-top"><div class="brand">${LOGO_SVG}<span>Andro<span class="g">Gym</span></span></div><div class="mast-meta">${meta}</div></div>
     ${kicker ? `<div class="kicker">${esc(kicker)}</div>` : ''}
     <h1>${esc(title)}</h1>
     ${factLine ? `<div class="facts">${factLine}</div>` : ''}

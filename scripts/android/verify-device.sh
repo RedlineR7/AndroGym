@@ -22,7 +22,7 @@ fi
 command -v adb >/dev/null || { echo "adb is not on PATH (Android SDK platform-tools)"; exit 2; }
 adb start-server >/dev/null 2>&1 || true
 
-devices=$(adb devices | awk 'NR>1 && $2=="device" {print $1}')
+devices=$(adb devices | tr -d '\r' | awk 'NR>1 && $2=="device" {print $1}')
 if [ -z "$devices" ]; then
   echo "no authorised device. On the phone: USB debugging on, unlock it, accept the RSA prompt."
   adb devices
@@ -41,7 +41,8 @@ ok() { say "  ok  " "$1"; }
 bad() { say "  FAIL" "$1"; fail=1; }
 
 # 1. The APK really is the Android build of this fork, before it goes on the phone.
-aapt2=$(ls ${ANDROID_HOME:-$HOME/.android-sdk/sdk}/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1 || true)
+aapt2=$(ls ${ANDROID_HOME:-$HOME/.android-sdk/sdk}/build-tools/*/aapt2 \
+  ${ANDROID_HOME:-$HOME/.android-sdk/sdk}/build-tools/*/aapt2.exe 2>/dev/null | sort -V | tail -1 || true)
 if [ -n "$aapt2" ]; then
   badging=$("$aapt2" dump badging "$apk")
   pkg=$(printf '%s\n' "$badging" | sed -n "s/^package: name='\([^']*\)'.*/\1/p")

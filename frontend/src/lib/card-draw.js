@@ -105,7 +105,7 @@ export function brandNeedsBadge(bg) {
 }
 
 /**
- * The footer every card ends with: the official lockup (brand-green mark, "open" plus "Gym" in
+ * The footer every card ends with: the official lockup (brand-green mark, "Andro" plus "Gym" in
  * brand green, as in assets/logo) and the site at the other end. `y` is the text's baseline.
  * Drawn left to right whatever the language: it is a logo, and a logo does not mirror.
  */
@@ -135,8 +135,8 @@ export function drawBrand(ctx, { x, y, width, colors, family, size = 40, badge: 
   drawMark(ctx, lx, y - size * 0.36, markH, BRAND.green)
   let tx = lx + markH * MARK_ASPECT + gap
   ctx.fillStyle = onDark ? BRAND.light : BRAND.dark
-  ctx.fillText('open', tx, y)
-  tx += ctx.measureText('open').width
+  ctx.fillText('Andro', tx, y)
+  tx += ctx.measureText('Andro').width
   ctx.fillStyle = BRAND.green
   ctx.fillText('Gym', tx, y)
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px'
